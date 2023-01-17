@@ -1,0 +1,35 @@
+// RESET
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body,
+p,
+a,
+ul,
+li {
+  text-decoration: none;
+}
+
+li {
+  list-style-type: none;
+}
+
+// BASE STYLES
+body {
+  background: #f1f1f1;
+  margin: 0;
+  font-family: "Poppins";
+}
+
+img {
+  width: 100%;
+}
+
+.pages {
+  max-width: 1400px;
+  padding: 20px;
+  margin: 0 auto;
+}
