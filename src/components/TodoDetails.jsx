@@ -1,5 +1,7 @@
 import { useTodosContext } from "../context/hooks/useTodoContext"
 
+import formatDistanceToNow from "date-fns/formatDistanceToNow"
+
 const TodoDetails = ({ todo }) => {
   const {dispatch} = useTodosContext()
 
@@ -20,8 +22,8 @@ const TodoDetails = ({ todo }) => {
     <div className="todo-details">
       <h2>{todo.title}</h2>
       <p><strong>{todo.body}</strong></p>
-      <p>{todo.updatedAt}</p>
-      <span onClick={handleClick}>Delete</span>
+      <p>{formatDistanceToNow(new Date(todo.updatedAt), { addSuffix: true})}</p>
+      <span className="material-symbols-outlined" onClick={handleClick}>delete</span>
     </div>
   )
 }
