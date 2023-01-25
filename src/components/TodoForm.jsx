@@ -9,6 +9,7 @@ const TodoForm = () => {
   const [title, setTitle] = useState('')
   const [body, setBody] = useState('')
   const [error, setError] = useState(null)
+  const [emptyFields, setEmptyFields] = useState([])
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -27,12 +28,14 @@ const TodoForm = () => {
 
     if (!response.ok) {
       setError(json.error)
+      setEmptyFields(json.emptyFields)
     }
 
     if (response.ok) {
       setTitle('')
       setBody('')
       setError(null)
+      setEmptyFields([])
       console.log('New todo added', json)
       dispatch({type: 'CREATE_TODO', payload: json})
     }
@@ -46,13 +49,17 @@ const TodoForm = () => {
       <input
         type="text"
         onChange={(e) => setTitle(e.target.value)}
-        value={title} />
+        value={title}
+        className={emptyFields.includes('title') ? 'error' : ''}
+        />
 
       <label htmlFor="">Body</label>
       <input
         type="text"
         onChange={(e) => setBody(e.target.value)}
-        value={body} />
+        value={body}
+        className={emptyFields.includes('body') ? 'error' : ''}
+        />
 
       <button>Add todo</button>
       {error && <div className="error">{error}</div>}
