@@ -1,11 +1,13 @@
-import { useEffect, useState } from "react"
+import { useEffect} from "react"
 import TodoDetails from "../components/TodoDetails"
 import TodoForm from "../components/TodoForm"
+import { useTodosContext } from "../context/hooks/useTodoContext"
+
 
 const API = 'http://localhost:4000/api/'
 
 export const Home = () => {
-  const [todos, setTodos] = useState(null)
+  const {todos, dispatch} = useTodosContext()
 
   useEffect(() => {
 
@@ -14,7 +16,7 @@ export const Home = () => {
       const json = await response.json()
 
       if (response.ok) {
-        setTodos(json)
+        dispatch({type: 'SET_TODOS', payload: json})
       }
     }
     fetchTodos()

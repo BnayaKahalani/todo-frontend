@@ -1,8 +1,11 @@
 import { useState } from "react"
+import { useTodosContext } from "../context/hooks/useTodoContext"
 
 const API = 'http://localhost:4000/api/'
 
 const TodoForm = () => {
+  const {dispatch} = useTodosContext()
+
   const [title, setTitle] = useState('')
   const [body, setBody] = useState('')
   const [error, setError] = useState(null)
@@ -31,6 +34,7 @@ const TodoForm = () => {
       setBody('')
       setError(null)
       console.log('New todo added', json)
+      dispatch({type: 'CREATE_TODO', payload: json})
     }
   }
 
