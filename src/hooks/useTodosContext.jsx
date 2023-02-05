@@ -1,10 +1,10 @@
-import { useContext } from "react";
-import { TodosContext } from "../todoContext";
+import { useContext } from 'react'
+import { TodosContext } from '../context/TodoContext'
 
 export const useTodosContext = () => {
   const context = useContext(TodosContext)
 
-  if(!context) {
+  if (!context) {
     throw Error('useTodosContext must be used inside an TodosContextProvider')
   }
 

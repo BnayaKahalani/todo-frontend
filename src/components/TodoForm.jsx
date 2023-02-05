@@ -1,10 +1,10 @@
-import { useState } from "react"
-import { useTodosContext } from "../context/hooks/useTodoContext"
+import { useState } from 'react'
+import { useTodosContext } from '../hooks/useTodosContext'
 
 const API = 'http://localhost:4000/api/'
 
 const TodoForm = () => {
-  const {dispatch} = useTodosContext()
+  const { dispatch } = useTodosContext()
 
   const [title, setTitle] = useState('')
   const [body, setBody] = useState('')
@@ -20,8 +20,8 @@ const TodoForm = () => {
       method: 'POST',
       body: JSON.stringify(todo),
       headers: {
-        'Content-Type': 'application/json'
-      }
+        'Content-Type': 'application/json',
+      },
     })
 
     const json = await response.json()
@@ -37,7 +37,7 @@ const TodoForm = () => {
       setError(null)
       setEmptyFields([])
       console.log('New todo added', json)
-      dispatch({type: 'CREATE_TODO', payload: json})
+      dispatch({ type: 'CREATE_TODO', payload: json })
     }
   }
 
@@ -51,7 +51,7 @@ const TodoForm = () => {
         onChange={(e) => setTitle(e.target.value)}
         value={title}
         className={emptyFields.includes('title') ? 'error' : ''}
-        />
+      />
 
       <label htmlFor="">Body</label>
       <input
@@ -59,7 +59,7 @@ const TodoForm = () => {
         onChange={(e) => setBody(e.target.value)}
         value={body}
         className={emptyFields.includes('body') ? 'error' : ''}
-        />
+      />
 
       <button>Add todo</button>
       {error && <div className="error">{error}</div>}

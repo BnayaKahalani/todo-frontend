@@ -1,13 +1,16 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-import App from './App'
-import { TodoContextProvider } from "./context/todoContext"
-import index from './styles/index.scss'
+import React from "react"
+import ReactDOM from "react-dom/client"
+import App from "./App"
+import { TodosContextProvider } from "./context/TodoContext"
+import { AuthContextProvider } from "./context/AuthContext"
+import "./styles/index.scss"
 
-ReactDOM.createRoot(document.getElementById('root')).render(
+ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <TodoContextProvider>
-      <App />
-    </TodoContextProvider>
+    <AuthContextProvider>
+      <TodosContextProvider>
+        <App />
+      </TodosContextProvider>
+    </AuthContextProvider>
   </React.StrictMode>
 )
