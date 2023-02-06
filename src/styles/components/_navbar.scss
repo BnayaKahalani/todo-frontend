@@ -5,4 +5,15 @@ nav {
   a {
     margin-left: 10px;
   }
+
+  button {
+    background: #fff;
+    color: $primary;
+    border: 2px solid $primary;
+    padding: 6px 10px;
+    border-radius: 4px;
+    font-family: "Poppins";
+    cursor: pointer;
+    font-size: 1em;
+  }
 }
