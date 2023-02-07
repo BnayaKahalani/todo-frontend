@@ -28,11 +28,13 @@ const TodoForm = () => {
       body: JSON.stringify(todo),
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${user.token}`,
+        Authorization: "Bearer" + user.token,
       },
     })
 
     const json = await response.json()
+
+    console.log(json)
 
     if (!response.ok) {
       setError(json.error)
@@ -44,7 +46,6 @@ const TodoForm = () => {
       setBody("")
       setError(null)
       setEmptyFields([])
-      console.log("New todo added", json)
       dispatch({ type: "CREATE_TODO", payload: json })
     }
   }
