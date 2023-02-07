@@ -1,31 +1,42 @@
-import { useTodosContext } from '../hooks/useTodosContext'
-
-import formatDistanceToNow from 'date-fns/formatDistanceToNow'
+import { useTodosContext } from "../hooks/useTodosContext"
+import formatDistanceToNow from "date-fns/formatDistanceToNow"
+import { useAuthContext } from "../hooks/useAuthContext"
 
 const TodoDetails = ({ todo }) => {
   const { dispatch } = useTodosContext()
+  const { user } = useAuthContext()
 
-  const API = 'http://localhost:4000/api/'
+  const API = "http://localhost:4000/api/"
 
   const handleClick = async () => {
-    const response = await fetch(API + 'todos/' + todo._id, {
-      method: 'DELETE',
+    if (!user) {
+      return
+    }
+
+    const response = await fetch(API + "todos/" + todo._id, {
+      method: "DELETE",
+      headers: {
+        Authorization: `Bearer ${user.token}`,
+      },
     })
     const json = await response.json()
 
     if (response.ok) {
-      dispatch({ type: 'DELETE_TODO', payload: json })
+      dispatch({ type: "DELETE_TODO", payload: json })
     }
   }
 
   return (
-    <div className="todo-details">
+    <div className='todo-details'>
       <h2>{todo.title}</h2>
       <p>
         <strong>{todo.body}</strong>
       </p>
       <p>{formatDistanceToNow(new Date(todo.updatedAt), { addSuffix: true })}</p>
-      <span className="material-symbols-outlined" onClick={handleClick}>
+      <span
+        className='material-symbols-outlined'
+        onClick={handleClick}
+      >
         delete
       </span>
     </div>

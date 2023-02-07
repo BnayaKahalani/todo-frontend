@@ -1,26 +1,34 @@
-import { useState } from 'react'
-import { useTodosContext } from '../hooks/useTodosContext'
+import { useState } from "react"
+import { useTodosContext } from "../hooks/useTodosContext"
+import { useAuthContext } from "../hooks/useAuthContext"
 
-const API = 'http://localhost:4000/api/'
+const API = "http://localhost:4000/api/"
 
 const TodoForm = () => {
   const { dispatch } = useTodosContext()
+  const { user } = useAuthContext()
 
-  const [title, setTitle] = useState('')
-  const [body, setBody] = useState('')
+  const [title, setTitle] = useState("")
+  const [body, setBody] = useState("")
   const [error, setError] = useState(null)
   const [emptyFields, setEmptyFields] = useState([])
 
   const handleSubmit = async (e) => {
     e.preventDefault()
 
+    if (!user) {
+      setError("You must be logged in")
+      return
+    }
+
     const todo = { title, body }
 
-    const response = await fetch(API + 'todos', {
-      method: 'POST',
+    const response = await fetch(API + "todos", {
+      method: "POST",
       body: JSON.stringify(todo),
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${user.token}`,
       },
     })
 
@@ -32,37 +40,40 @@ const TodoForm = () => {
     }
 
     if (response.ok) {
-      setTitle('')
-      setBody('')
+      setTitle("")
+      setBody("")
       setError(null)
       setEmptyFields([])
-      console.log('New todo added', json)
-      dispatch({ type: 'CREATE_TODO', payload: json })
+      console.log("New todo added", json)
+      dispatch({ type: "CREATE_TODO", payload: json })
     }
   }
 
   return (
-    <form className="todo-form" onSubmit={handleSubmit}>
+    <form
+      className='todo-form'
+      onSubmit={handleSubmit}
+    >
       <h3>Add a new todo</h3>
 
-      <label htmlFor="">Title</label>
+      <label htmlFor=''>Title</label>
       <input
-        type="text"
+        type='text'
         onChange={(e) => setTitle(e.target.value)}
         value={title}
-        className={emptyFields.includes('title') ? 'error' : ''}
+        className={emptyFields.includes("title") ? "error" : ""}
       />
 
-      <label htmlFor="">Body</label>
+      <label htmlFor=''>Body</label>
       <input
-        type="text"
+        type='text'
         onChange={(e) => setBody(e.target.value)}
         value={body}
-        className={emptyFields.includes('body') ? 'error' : ''}
+        className={emptyFields.includes("body") ? "error" : ""}
       />
 
       <button>Add todo</button>
-      {error && <div className="error">{error}</div>}
+      {error && <div className='error'>{error}</div>}
     </form>
   )
 }
