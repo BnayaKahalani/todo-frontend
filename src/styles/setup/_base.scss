@@ -19,9 +19,10 @@ li {
 
 // BASE STYLES
 body {
-  background: #f1f1f1;
   margin: 0;
   font-family: "Poppins";
+  background-image: url("./../assets/images/field.jpg");
+  background-repeat: no-repeat;
 }
 
 img {
@@ -39,7 +40,6 @@ form.login {
   max-width: 400px;
   margin: 40px auto;
   padding: 20px;
-  background: #fff;
   border-radius: 4px;
 }
 

@@ -33,6 +33,7 @@ const TodoDetails = ({ todo }) => {
         <strong>{todo.body}</strong>
       </p>
       <p>{formatDistanceToNow(new Date(todo.updatedAt), { addSuffix: true })}</p>
+      <span class='material-symbols-outlined'>edit</span>
       <span
         className='material-symbols-outlined'
         onClick={handleClick}
