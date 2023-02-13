@@ -18,8 +18,9 @@ export const Navbar = () => {
         </Link>
         <nav>
           {user && (
-            <div>
+            <div className='user-menu'>
               <span>{user.email}</span>
+              <span class='material-symbols-outlined settings-btn'>settings</span>
               <button onClick={handleClick}>Log out</button>
             </div>
           )}
