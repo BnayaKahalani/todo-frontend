@@ -6,9 +6,11 @@ export const Navbar = () => {
   const { logout } = useLogout()
   const { user } = useAuthContext()
 
-  const handleClick = () => {
+  const handleLogout = () => {
     logout()
   }
+
+  const handleSetting = () => {}
 
   return (
     <header>
@@ -20,8 +22,8 @@ export const Navbar = () => {
           {user && (
             <div className='user-menu'>
               <span>{user.email}</span>
-              <span class='material-symbols-outlined settings-btn'>settings</span>
-              <button onClick={handleClick}>Log out</button>
+              <span className='material-symbols-outlined settings-btn'>settings</span>
+              <button onClick={handleLogout}>Log out</button>
             </div>
           )}
           {!user && (
