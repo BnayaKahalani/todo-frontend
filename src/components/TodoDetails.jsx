@@ -28,12 +28,12 @@ const TodoDetails = ({ todo }) => {
 
   return (
     <div className='todo-details'>
+      <span className='material-symbols-outlined'>edit</span>
       <h2>{todo.title}</h2>
       <p>
         <strong>{todo.body}</strong>
       </p>
       <p>{formatDistanceToNow(new Date(todo.updatedAt), { addSuffix: true })}</p>
-      <span className='material-symbols-outlined'>edit</span>
       <span
         className='material-symbols-outlined'
         onClick={handleClick}

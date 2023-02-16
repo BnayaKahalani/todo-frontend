@@ -2,7 +2,7 @@ import React from "react"
 
 const Setting = () => {
   return (
-    <div className='settings'>
+    <div className='user-settings'>
       <label>Team:</label>
       <select>
         <option value='default'>Default</option>

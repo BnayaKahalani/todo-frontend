@@ -22,7 +22,12 @@ export const Navbar = () => {
           {user && (
             <div className='user-menu'>
               <span>{user.email}</span>
-              <span className='material-symbols-outlined settings-btn'>settings</span>
+              <Link
+                className='material-symbols-outlined user-settings-btn'
+                to='/user-settings'
+              >
+                settings
+              </Link>
               <button onClick={handleLogout}>Log out</button>
             </div>
           )}

@@ -28,7 +28,7 @@ const TodoForm = () => {
       body: JSON.stringify(todo),
       headers: {
         "Content-Type": "application/json",
-        Authorization: ` Bearer ${user.token}`,
+        Authorization: `Bearer ${user.token}`,
       },
     })
 
