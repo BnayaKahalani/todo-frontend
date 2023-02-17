@@ -28,7 +28,6 @@ const TodoDetails = ({ todo }) => {
 
   return (
     <div className='todo-details'>
-      <span className='material-symbols-outlined'>edit</span>
       <h2>{todo.title}</h2>
       <p>
         <strong>{todo.body}</strong>
@@ -39,6 +38,12 @@ const TodoDetails = ({ todo }) => {
         onClick={handleClick}
       >
         delete
+      </span>
+      <span
+        className='material-symbols-outlined'
+        onClick={handleClick}
+      >
+        edit
       </span>
     </div>
   )
