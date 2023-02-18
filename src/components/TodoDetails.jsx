@@ -28,23 +28,28 @@ const TodoDetails = ({ todo }) => {
 
   return (
     <div className='todo-details'>
-      <h2>{todo.title}</h2>
-      <p>
-        <strong>{todo.body}</strong>
-      </p>
-      <p>{formatDistanceToNow(new Date(todo.updatedAt), { addSuffix: true })}</p>
-      <span
-        className='material-symbols-outlined'
-        onClick={handleClick}
-      >
-        delete
-      </span>
-      <span
-        className='material-symbols-outlined'
-        onClick={handleClick}
-      >
-        edit
-      </span>
+      <div className='todo-details-text'>
+        <h2>{todo.title}</h2>
+        <p>
+          <strong>{todo.body}</strong>
+        </p>
+        <p>{formatDistanceToNow(new Date(todo.updatedAt), { addSuffix: true })}</p>
+      </div>
+      <div className='todo-details-btns'>
+        <span
+          className='material-symbols-outlined edit'
+          onClick={handleClick}
+        >
+          edit
+        </span>
+        <span class='material-symbols-outlined delete task'>task_alt</span>
+        <span
+          className='material-symbols-outlined delete'
+          onClick={handleClick}
+        >
+          delete
+        </span>
+      </div>
     </div>
   )
 }

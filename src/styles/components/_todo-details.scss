@@ -5,6 +5,18 @@
   padding: 20px;
   position: relative;
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.05);
+  display: flex;
+  justify-content: space-between;
+
+  .todo-details-btns {
+    display: flex;
+    align-items: center;
+
+    >*:not(:last-child) {
+      margin-right: 10px;
+    }
+
+  }
 
   h2 {
     margin: 0 0 10px 0;
