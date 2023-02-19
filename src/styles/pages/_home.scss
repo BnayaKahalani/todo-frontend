@@ -1,5 +1,16 @@
 .home {
   display: grid;
-  grid-template-columns: 3fr 1fr;
-  gap: 100px;
+
+  span.add {
+    position: absolute;
+    font-size: 3rem;
+    bottom: 3rem;
+    right: 3rem;
+    background-color: $primary;
+    border-radius: 50%;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
 }

@@ -37,14 +37,20 @@ const TodoDetails = ({ todo }) => {
       </div>
       <div className='todo-details-btns'>
         <span
-          className='material-symbols-outlined edit'
+          className='material-symbols-outlined'
           onClick={handleClick}
         >
           edit
         </span>
-        <span class='material-symbols-outlined delete task'>task_alt</span>
         <span
-          className='material-symbols-outlined delete'
+          style={{ backgroundColor: "#3CB371" }}
+          class='material-symbols-outlined'
+        >
+          task_alt
+        </span>
+        <span
+          style={{ backgroundColor: "#DC3545" }}
+          className='material-symbols-outlined '
           onClick={handleClick}
         >
           delete

@@ -38,8 +38,9 @@ export const Home = () => {
               todo={todo}
             />
           ))}
+        <span class='material-symbols-outlined add'>add</span>
       </div>
-      <TodoForm />
+      {/* <TodoForm /> */}
     </div>
   )
 }
