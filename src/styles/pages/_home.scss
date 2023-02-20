@@ -1,5 +1,9 @@
 .home {
-  display: grid;
+
+  .todos {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(500px, 1fr))
+  }
 
   span.add {
     position: absolute;
