@@ -4,7 +4,7 @@ import { useAuthContext } from "../hooks/useAuthContext"
 
 const API = "http://localhost:4000/api/"
 
-const TodoForm = () => {
+const TodoForm = ({ onClose }) => {
   const { dispatch } = useTodosContext()
   const { user } = useAuthContext()
 
@@ -47,6 +47,7 @@ const TodoForm = () => {
       setError(null)
       setEmptyFields([])
       dispatch({ type: "CREATE_TODO", payload: json })
+      onClose()
     }
   }
 

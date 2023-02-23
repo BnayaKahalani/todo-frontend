@@ -1,14 +1,24 @@
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import { useTodosContext } from "../hooks/useTodosContext"
 import TodoDetails from "../components/TodoDetails"
 import TodoForm from "../components/TodoForm"
 import { useAuthContext } from "../hooks/useAuthContext"
+import Dialog from "@mui/material/Dialog"
 
 const API = "http://localhost:4000/api/"
 
 export const Home = () => {
   const { todos, dispatch } = useTodosContext()
   const { user } = useAuthContext()
+
+  const [open, setOpen] = useState(false)
+
+  const handleClickOpen = () => {
+    setOpen(true)
+  }
+  const handleClose = () => {
+    setOpen(false)
+  }
 
   useEffect(() => {
     const fetchTodos = async () => {
@@ -38,9 +48,19 @@ export const Home = () => {
               todo={todo}
             />
           ))}
-        <span class='material-symbols-outlined add'>add</span>
+        <span
+          class='material-symbols-outlined add'
+          onClick={handleClickOpen}
+        >
+          add
+        </span>
+        <Dialog
+          open={open}
+          onClose={handleClose}
+        >
+          <TodoForm onClose={handleClose} />
+        </Dialog>
       </div>
-      {/* <TodoForm /> */}
     </div>
   )
 }
