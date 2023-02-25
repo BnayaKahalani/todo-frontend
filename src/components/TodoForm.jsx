@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useState, useRef, useEffect } from "react"
 import { useTodosContext } from "../hooks/useTodosContext"
 import { useAuthContext } from "../hooks/useAuthContext"
 
@@ -12,6 +12,12 @@ const TodoForm = ({ onClose }) => {
   const [body, setBody] = useState("")
   const [error, setError] = useState(null)
   const [emptyFields, setEmptyFields] = useState([])
+
+  const inputRef = useRef(null)
+
+  useEffect(() => {
+    inputRef.current.focus()
+  }, [])
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -64,6 +70,7 @@ const TodoForm = ({ onClose }) => {
         onChange={(e) => setTitle(e.target.value)}
         value={title}
         className={emptyFields.includes("title") ? "error" : ""}
+        ref={inputRef}
       />
 
       <label htmlFor=''>Body</label>
