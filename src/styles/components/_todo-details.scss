@@ -7,6 +7,12 @@
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.05);
   display: flex;
   justify-content: space-between;
+  text-decoration: none;
+
+  .crossed-out {
+    text-decoration: line-through;
+    transition: text-decoration 0.2s ease-in-out;
+  }
 
   .todo-details-btns {
     display: flex;
@@ -24,8 +30,6 @@
     :not(:last-child) {
       margin-right: 10px;
     }
-
-
   }
 
   h2 {

@@ -1,14 +1,20 @@
 import { useTodosContext } from "../hooks/useTodosContext"
 import formatDistanceToNow from "date-fns/formatDistanceToNow"
 import { useAuthContext } from "../hooks/useAuthContext"
+import { useState } from "react"
 
 const TodoDetails = ({ todo }) => {
   const { dispatch } = useTodosContext()
   const { user } = useAuthContext()
 
+  const [isTitleCrossedOut, setIsTitleCrossedOut] = useState(false)
+
   const API = "http://localhost:4000/api/"
 
-  const handleClick = async () => {
+  const handleEditClick = () => {
+    setIsTitleCrossedOut(!isTitleCrossedOut)
+  }
+  const handleDeleteClick = async () => {
     if (!user) {
       return
     }
@@ -29,29 +35,30 @@ const TodoDetails = ({ todo }) => {
   return (
     <div className='todo-details'>
       <div className='todo-details-text'>
-        <h2>{todo.title}</h2>
+        <h2 className={isTitleCrossedOut ? "crossed-out" : ""}>{todo.title}</h2>
         <p>
-          <strong>{todo.body}</strong>
+          <strong className={isTitleCrossedOut ? "crossed-out" : ""}>{todo.body}</strong>
         </p>
         <p>{formatDistanceToNow(new Date(todo.updatedAt), { addSuffix: true })}</p>
       </div>
       <div className='todo-details-btns'>
         <span
           className='material-symbols-outlined'
-          onClick={handleClick}
+          onClick={handleDeleteClick}
         >
           edit
         </span>
         <span
           style={{ backgroundColor: "#3CB371" }}
           class='material-symbols-outlined'
+          onClick={handleEditClick}
         >
           task_alt
         </span>
         <span
           style={{ backgroundColor: "#DC3545" }}
           className='material-symbols-outlined '
-          onClick={handleClick}
+          onClick={handleDeleteClick}
         >
           delete
         </span>
