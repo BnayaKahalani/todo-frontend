@@ -5,6 +5,8 @@ import TodoForm from "../components/TodoForm"
 import { useAuthContext } from "../hooks/useAuthContext"
 import Dialog from "@mui/material/Dialog"
 
+import ResponsiveAppBar from "../components/ResponsiveAppBar.jsx"
+
 const API = "http://localhost:4000/api/"
 
 export const Home = () => {
@@ -61,6 +63,7 @@ export const Home = () => {
           <TodoForm onClose={handleClose} />
         </Dialog>
       </div>
+      <ResponsiveAppBar />
     </div>
   )
 }

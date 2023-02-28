@@ -11,9 +11,10 @@ const TodoDetails = ({ todo }) => {
 
   const API = "http://localhost:4000/api/"
 
-  const handleEditClick = () => {
+  const handleDoneClick = () => {
     setIsTitleCrossedOut(!isTitleCrossedOut)
   }
+
   const handleDeleteClick = async () => {
     if (!user) {
       return
@@ -51,7 +52,7 @@ const TodoDetails = ({ todo }) => {
         <span
           style={{ backgroundColor: "#3CB371" }}
           class='material-symbols-outlined'
-          onClick={handleEditClick}
+          onClick={handleDoneClick}
         >
           task_alt
         </span>
