@@ -1,7 +1,6 @@
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom"
 import { useAuthContext } from "./hooks/useAuthContext"
-
-import { Navbar } from "./components/Navbar"
+import ResponsiveAppBar from "./components/ResponsiveAppBar.jsx"
 import { Home } from "./pages/Home"
 import Login from "./pages/Login"
 import Signup from "./pages/Signup"
@@ -12,7 +11,7 @@ function App() {
   return (
     <div className='app'>
       <BrowserRouter>
-        <Navbar />
+        <ResponsiveAppBar />
         <div className='pages'>
           <Routes>
             <Route

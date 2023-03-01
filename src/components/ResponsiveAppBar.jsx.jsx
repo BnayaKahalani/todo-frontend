@@ -11,7 +11,10 @@ import Avatar from "@mui/material/Avatar"
 import Button from "@mui/material/Button"
 import Tooltip from "@mui/material/Tooltip"
 import MenuItem from "@mui/material/MenuItem"
-import AdbIcon from "@mui/icons-material/Adb"
+import SportsSoccerIcon from "@mui/icons-material/SportsSoccer"
+import { Navbar } from "./Navbar"
+import { useLogout } from "../hooks/useLogout"
+import { useAuthContext } from "../hooks/useAuthContext"
 
 const pages = ["Products", "Pricing", "Blog"]
 const settings = ["Profile", "Account", "Dashboard", "Logout"]
@@ -19,6 +22,15 @@ const settings = ["Profile", "Account", "Dashboard", "Logout"]
 function ResponsiveAppBar() {
   const [anchorElNav, setAnchorElNav] = React.useState(null)
   const [anchorElUser, setAnchorElUser] = React.useState(null)
+
+  const { logout } = useLogout()
+  const { user } = useAuthContext()
+
+  const handleLogout = () => {
+    logout()
+  }
+
+  const handleSetting = () => {}
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget)
@@ -36,10 +48,13 @@ function ResponsiveAppBar() {
   }
 
   return (
-    <AppBar position='static'>
+    <AppBar
+      style={{ background: "white", color: "black" }}
+      position='static'
+    >
       <Container maxWidth='xl'>
         <Toolbar disableGutters>
-          <AdbIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} />
+          <SportsSoccerIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} />
           <Typography
             variant='h6'
             noWrap
@@ -50,12 +65,11 @@ function ResponsiveAppBar() {
               display: { xs: "none", md: "flex" },
               fontFamily: "monospace",
               fontWeight: 700,
-              letterSpacing: ".3rem",
               color: "inherit",
               textDecoration: "none",
             }}
           >
-            LOGO
+            GoalGuru
           </Typography>
 
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
@@ -97,7 +111,7 @@ function ResponsiveAppBar() {
               ))}
             </Menu>
           </Box>
-          <AdbIcon sx={{ display: { xs: "flex", md: "none" }, mr: 1 }} />
+          <SportsSoccerIcon sx={{ display: { xs: "flex", md: "none" }, mr: 1 }} />
           <Typography
             variant='h5'
             noWrap
@@ -109,19 +123,18 @@ function ResponsiveAppBar() {
               flexGrow: 1,
               fontFamily: "monospace",
               fontWeight: 700,
-              letterSpacing: ".3rem",
               color: "inherit",
               textDecoration: "none",
             }}
           >
-            LOGO
+            GoalGuru
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
             {pages.map((page) => (
               <Button
                 key={page}
                 onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: "white", display: "block" }}
+                sx={{ my: 2, color: "black", display: "block" }}
               >
                 {page}
               </Button>
