@@ -51,6 +51,7 @@ function ResponsiveAppBar() {
     <AppBar
       style={{ background: "white", color: "black" }}
       position='static'
+      sx={{ display: "flex", justifyContent: "center" }}
     >
       <Container maxWidth='xl'>
         <Toolbar disableGutters>
@@ -129,7 +130,8 @@ function ResponsiveAppBar() {
           >
             GoalGuru
           </Typography>
-          <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
+
+          <Box sx={{ display: { xs: "none", md: "flex" } }}>
             {pages.map((page) => (
               <Button
                 key={page}
