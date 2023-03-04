@@ -10,8 +10,6 @@ export const Navbar = () => {
     logout()
   }
 
-  const handleSetting = () => {}
-
   return (
     <header>
       <div className='header-container'>
