@@ -51,7 +51,7 @@ const TodoDetails = ({ todo }) => {
         </span>
         <span
           style={{ backgroundColor: "#3CB371" }}
-          class='material-symbols-outlined'
+          className='material-symbols-outlined'
           onClick={handleDoneClick}
         >
           task_alt

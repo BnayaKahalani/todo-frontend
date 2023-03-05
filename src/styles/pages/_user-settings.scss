@@ -1,4 +1,10 @@
 .user-settings {
   display: flex;
+  flex-direction: column;
+  width: 500px;
+  margin: auto;
+  background-color: white;
+  padding: 15px;
   gap: 5px;
+  border-radius: 4px;
 }

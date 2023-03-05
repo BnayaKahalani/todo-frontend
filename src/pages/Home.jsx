@@ -49,7 +49,7 @@ export const Home = () => {
             />
           ))}
         <span
-          class='material-symbols-outlined add'
+          className='material-symbols-outlined add'
           onClick={handleClickOpen}
         >
           add
