@@ -1,8 +1,13 @@
 import { React, useState } from "react"
-import { Box, Typography, Switch } from "@mui/material"
+import { Box, Typography, Switch, FormControl, InputLabel, Select, MenuItem } from "@mui/material"
 
 const Setting = () => {
   const [darkMode, setDarkMode] = useState(false)
+  const [team, setTeam] = useState("")
+
+  const handleChange = (event) => {
+    setTeam(event.target.value)
+  }
 
   const handleDarkModeChange = () => {
     setDarkMode(!darkMode)
@@ -21,13 +26,24 @@ const Setting = () => {
         </Box>
       </Box>
 
-      <label>Team:</label>
-      <select>
-        <option value='default'>Default</option>
-        <option value='barcelona'>Barcelona</option>
-        <option value='real-madrid'>Real Madrid</option>
-        <option value='liverpool'>Liverpool</option>
-      </select>
+      <Box>
+        <FormControl fullWidth>
+          <InputLabel id='favorite-team'>Favorite Team</InputLabel>
+          <Select
+            labelId='favorite-team'
+            id='select'
+            variant='outlined'
+            value={team}
+            label='Favorite Team'
+            onChange={handleChange}
+          >
+            <MenuItem value={"default"}>Default</MenuItem>
+            <MenuItem value={"barcelona"}>Barcelona</MenuItem>
+            <MenuItem value={"real-madrid"}>Real Madrid</MenuItem>
+            <MenuItem value={"liverpool"}>Liverpool</MenuItem>
+          </Select>
+        </FormControl>
+      </Box>
     </div>
   )
 }

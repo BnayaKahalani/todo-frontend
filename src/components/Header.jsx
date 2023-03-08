@@ -18,6 +18,7 @@ const Header = () => {
   const { user } = useAuthContext()
 
   const handleLogout = () => {
+    setAnchorElUser(null)
     logout()
   }
 
@@ -33,8 +34,8 @@ const Header = () => {
   }
 
   const handleUserMenuClick = (pageURL) => {
-    navigate(pageURL)
     setAnchorElUser(null)
+    navigate(pageURL)
   }
 
   return (
