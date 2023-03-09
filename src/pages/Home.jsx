@@ -38,16 +38,30 @@ export const Home = () => {
     }
   }, [dispatch, user])
 
+  console.log(todos)
+
   return (
     <div className='home'>
       <div className='todos'>
-        {todos &&
-          todos.map((todo) => (
-            <TodoDetails
-              key={todo._id}
-              todo={todo}
-            />
-          ))}
+        {todos ? (
+          todos.length === 0 ? (
+            <h1 className='no-todos'>What's your goal right now?</h1>
+          ) : (
+            todos.map((todo) => (
+              <TodoDetails
+                key={todo._id}
+                todo={todo}
+              />
+            ))
+          )
+        ) : (
+          <div class='box'>
+            <div class='shadow'></div>
+            <div class='gravity'>
+              <div class='ball'></div>
+            </div>
+          </div>
+        )}
         <span
           className='material-symbols-outlined add'
           onClick={handleClickOpen}
