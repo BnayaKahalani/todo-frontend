@@ -33,6 +33,26 @@ const TodoDetails = ({ todo }) => {
     }
   }
 
+  const handleUpdateClick = async (updatedTodo) => {
+    if (!user) {
+      return
+    }
+
+    const response = await fetch(API + "todos/" + updatedTodo._id, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${user.token}`,
+      },
+      body: JSON.stringify(updatedTodo),
+    })
+    const json = await response.json()
+
+    if (response.ok) {
+      dispatch({ type: "UPDATE_TODO", payload: json })
+    }
+  }
+
   return (
     <div className='todo-details'>
       <div className='todo-details-text'>
@@ -45,7 +65,7 @@ const TodoDetails = ({ todo }) => {
       <div className='todo-details-btns'>
         <span
           className='material-symbols-outlined'
-          onClick={handleDeleteClick}
+          onClick={handleUpdateClick}
         >
           edit
         </span>

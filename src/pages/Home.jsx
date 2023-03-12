@@ -3,6 +3,7 @@ import { useTodosContext } from "../hooks/useTodosContext"
 import TodoDetails from "../components/TodoDetails"
 import TodoForm from "../components/TodoForm"
 import { useAuthContext } from "../hooks/useAuthContext"
+import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd"
 import Dialog from "@mui/material/Dialog"
 
 const API = "http://localhost:4000/api/"
@@ -12,6 +13,20 @@ export const Home = () => {
   const { user } = useAuthContext()
 
   const [open, setOpen] = useState(false)
+
+  const onDragEnd = (result) => {
+    if (!result.destination) return
+
+    const { source, destination } = result
+
+    // Update the order of the todos based on the drag and drop
+    const newTodos = Array.from(todos)
+    const [removed] = newTodos.splice(source.index, 1)
+    newTodos.splice(destination.index, 0, removed)
+
+    // Update the order of the todos in the context
+    dispatch({ type: "SET_TODOS", payload: newTodos })
+  }
 
   const handleClickOpen = () => {
     setOpen(true)
@@ -38,43 +53,63 @@ export const Home = () => {
     }
   }, [dispatch, user])
 
-  console.log(todos)
-
   return (
     <div className='home'>
-      <div className='todos'>
-        {todos ? (
-          todos.length === 0 ? (
-            <h1 className='no-todos'>What's your goal right now?</h1>
-          ) : (
-            todos.map((todo) => (
-              <TodoDetails
-                key={todo._id}
-                todo={todo}
-              />
-            ))
-          )
-        ) : (
-          <div class='box'>
-            <div class='shadow'></div>
-            <div class='gravity'>
-              <div class='ball'></div>
+      <DragDropContext onDragEnd={onDragEnd}>
+        <Droppable droppableId='todos'>
+          {(provided) => (
+            <div
+              className='todos'
+              {...provided.droppableProps}
+              ref={provided.innerRef}
+            >
+              {todos ? (
+                todos.length === 0 ? (
+                  <h1 className='no-todos'>Your next goal?</h1>
+                ) : (
+                  todos.map((todo, index) => (
+                    <Draggable
+                      key={todo._id}
+                      draggableId={todo._id}
+                      index={index}
+                    >
+                      {(provided) => (
+                        <div
+                          ref={provided.innerRef}
+                          {...provided.draggableProps}
+                          {...provided.dragHandleProps}
+                        >
+                          <TodoDetails todo={todo} />
+                        </div>
+                      )}
+                    </Draggable>
+                  ))
+                )
+              ) : (
+                <div className='box'>
+                  <div className='shadow'></div>
+                  <div className='gravity'>
+                    <div className='ball'></div>
+                  </div>
+                </div>
+              )}
+              <span
+                className='material-symbols-outlined add'
+                onClick={handleClickOpen}
+              >
+                add
+              </span>
+              {provided.placeholder}
+              <Dialog
+                open={open}
+                onClose={handleClose}
+              >
+                <TodoForm onClose={handleClose} />
+              </Dialog>
             </div>
-          </div>
-        )}
-        <span
-          className='material-symbols-outlined add'
-          onClick={handleClickOpen}
-        >
-          add
-        </span>
-        <Dialog
-          open={open}
-          onClose={handleClose}
-        >
-          <TodoForm onClose={handleClose} />
-        </Dialog>
-      </div>
+          )}
+        </Droppable>
+      </DragDropContext>
     </div>
   )
 }

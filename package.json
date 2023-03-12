@@ -17,6 +17,7 @@
     "@mui/material": "^5.11.9",
     "date-fns": "^2.29.3",
     "react": "^18.2.0",
+    "react-beautiful-dnd": "^13.1.1",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.6.2",
     "sass": "^1.57.1"

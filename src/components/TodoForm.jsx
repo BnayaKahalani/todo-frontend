@@ -40,8 +40,6 @@ const TodoForm = ({ onClose }) => {
 
     const json = await response.json()
 
-    console.log(emptyFields)
-
     if (!response.ok) {
       setError(json.error)
       setEmptyFields(json.emptyFields)
