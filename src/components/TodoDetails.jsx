@@ -2,12 +2,15 @@ import { useTodosContext } from "../hooks/useTodosContext"
 import formatDistanceToNow from "date-fns/formatDistanceToNow"
 import { useAuthContext } from "../hooks/useAuthContext"
 import { useState } from "react"
+import Dialog from "@mui/material/Dialog"
+import TodoForm from "../components/TodoForm"
 
 const TodoDetails = ({ todo }) => {
   const { dispatch } = useTodosContext()
   const { user } = useAuthContext()
 
   const [isTitleCrossedOut, setIsTitleCrossedOut] = useState(false)
+  const [open, setOpen] = useState(false)
 
   const API = "http://localhost:4000/api/"
 
@@ -53,6 +56,13 @@ const TodoDetails = ({ todo }) => {
     }
   }
 
+  const handleClickOpen = () => {
+    setOpen(true)
+  }
+  const handleClose = () => {
+    setOpen(false)
+  }
+
   return (
     <div className='todo-details'>
       <div className='todo-details-text'>
@@ -65,10 +75,16 @@ const TodoDetails = ({ todo }) => {
       <div className='todo-details-btns'>
         <span
           className='material-symbols-outlined'
-          onClick={handleUpdateClick}
+          onClick={handleClickOpen}
         >
           edit
         </span>
+        <Dialog
+          open={open}
+          onClose={handleClose}
+        >
+          <TodoForm onClose={handleClose} />
+        </Dialog>
         <span
           style={{ backgroundColor: "#3CB371" }}
           className='material-symbols-outlined'

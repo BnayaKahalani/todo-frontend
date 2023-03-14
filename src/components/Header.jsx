@@ -1,18 +1,15 @@
-import React from "react"
+import { React, useState } from "react"
 import { useNavigate } from "react-router-dom"
 
-import { AppBar, Box, Toolbar, IconButton, Typography, Menu, Container, Avatar, Button, MenuItem } from "@mui/material"
-import { Menu as MenuIcon, SportsSoccer as SportsSoccerIcon } from "@mui/icons-material"
+import { AppBar, Box, Toolbar, IconButton, Typography, Menu, Container, Avatar, MenuItem } from "@mui/material"
+import { SportsSoccer as SportsSoccerIcon } from "@mui/icons-material"
 
 import { useLogout } from "../hooks/useLogout"
 import { useAuthContext } from "../hooks/useAuthContext"
 
-const pages = ["Products", "Pricing", "Blog"]
-
 const Header = () => {
   const navigate = useNavigate()
-  const [anchorElNav, setAnchorElNav] = React.useState(null)
-  const [anchorElUser, setAnchorElUser] = React.useState(null)
+  const [anchorElUser, setAnchorElUser] = useState(null)
 
   const { logout } = useLogout()
   const { user } = useAuthContext()
@@ -29,10 +26,6 @@ const Header = () => {
     setAnchorElUser(event.currentTarget)
   }
 
-  const handleCloseNavMenu = () => {
-    setAnchorElNav(null)
-  }
-
   const handleUserMenuClick = (pageURL) => {
     setAnchorElUser(null)
     navigate(pageURL)
@@ -44,24 +37,29 @@ const Header = () => {
       position='static'
     >
       <Container maxWidth='xl'>
-        <Toolbar disableGutters>
-          <SportsSoccerIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} />
-          <Typography
-            variant='h6'
-            noWrap
-            component='a'
-            href='/'
-            sx={{
-              mr: 2,
-              display: { xs: "none", md: "flex" },
-              fontFamily: "monospace",
-              fontWeight: 700,
-              color: "inherit",
-              textDecoration: "none",
-            }}
-          >
-            GoalGuru
-          </Typography>
+        <Toolbar
+          disableGutters
+          sx={{ justifyContent: "space-between" }}
+        >
+          <Box sx={{ display: "flex", alignItems: "center" }}>
+            <SportsSoccerIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} />
+            <Typography
+              variant='h6'
+              noWrap
+              component='a'
+              href='/'
+              sx={{
+                mr: 2,
+                display: { xs: "none", md: "flex" },
+                fontFamily: "monospace",
+                fontWeight: 700,
+                color: "inherit",
+                textDecoration: "none",
+              }}
+            >
+              GoalGuru
+            </Typography>
+          </Box>
 
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
             <IconButton
@@ -71,36 +69,7 @@ const Header = () => {
               aria-haspopup='true'
               onClick={handleOpenNavMenu}
               color='inherit'
-            >
-              <MenuIcon />
-            </IconButton>
-            <Menu
-              id='menu-appbar'
-              anchorEl={anchorElNav}
-              anchorOrigin={{
-                vertical: "bottom",
-                horizontal: "left",
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: "top",
-                horizontal: "left",
-              }}
-              open={Boolean(anchorElNav)}
-              onClose={handleCloseNavMenu}
-              sx={{
-                display: { xs: "block", md: "none" },
-              }}
-            >
-              {pages.map((page) => (
-                <MenuItem
-                  key={page}
-                  onClick={handleCloseNavMenu}
-                >
-                  <Typography textAlign='center'>{page}</Typography>
-                </MenuItem>
-              ))}
-            </Menu>
+            ></IconButton>
           </Box>
           <SportsSoccerIcon sx={{ display: { xs: "flex", md: "none" }, mr: 1 }} />
           <Typography
@@ -120,18 +89,6 @@ const Header = () => {
           >
             GoalGuru
           </Typography>
-
-          <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
-            {pages.map((page) => (
-              <Button
-                key={page}
-                onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: "black", display: "block" }}
-              >
-                {page}
-              </Button>
-            ))}
-          </Box>
 
           {user && (
             <Box sx={{ flexGrow: 0 }}>
@@ -181,4 +138,5 @@ const Header = () => {
     </AppBar>
   )
 }
+
 export default Header
