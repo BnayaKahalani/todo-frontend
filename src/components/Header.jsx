@@ -1,5 +1,5 @@
 import { React, useState } from "react"
-import { useNavigate } from "react-router-dom"
+import { useNavigate, Link } from "react-router-dom"
 
 import { AppBar, Box, Toolbar, IconButton, Typography, Menu, Container, Avatar, MenuItem } from "@mui/material"
 import { SportsSoccer as SportsSoccerIcon } from "@mui/icons-material"
@@ -132,6 +132,12 @@ const Header = () => {
                 </MenuItem>
               </Menu>
             </Box>
+          )}
+          {!user && (
+            <div className='login-logout'>
+              <Link to='/login'>Login</Link>
+              <Link to='/signup'>Signup</Link>
+            </div>
           )}
         </Toolbar>
       </Container>
