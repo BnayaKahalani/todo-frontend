@@ -16,6 +16,10 @@
     &:hover {
       cursor: pointer;
     }
+
+    @media (max-width: 899px) {
+      display: none;
+    }
   }
 
   .no-todos {

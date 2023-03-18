@@ -1,14 +1,17 @@
 import { React, useState } from "react"
 import { useNavigate, Link } from "react-router-dom"
 
-import { AppBar, Box, Toolbar, IconButton, Typography, Menu, Container, Avatar, MenuItem } from "@mui/material"
+import { AppBar, Box, Toolbar, IconButton, Typography, Menu, Container, Avatar, MenuItem, Dialog } from "@mui/material"
 import { SportsSoccer as SportsSoccerIcon } from "@mui/icons-material"
 
 import { useLogout } from "../hooks/useLogout"
 import { useAuthContext } from "../hooks/useAuthContext"
 
+import TodoForm from "../components/TodoForm"
+
 const Header = () => {
   const navigate = useNavigate()
+  const [open, setOpen] = useState(false)
   const [anchorElUser, setAnchorElUser] = useState(null)
 
   const { logout } = useLogout()
@@ -29,6 +32,13 @@ const Header = () => {
   const handleUserMenuClick = (pageURL) => {
     setAnchorElUser(null)
     navigate(pageURL)
+  }
+
+  const handleClickOpen = () => {
+    setOpen(true)
+  }
+  const handleClose = () => {
+    setOpen(false)
   }
 
   return (
@@ -62,6 +72,22 @@ const Header = () => {
           </Box>
 
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
+            {user && (
+              <div>
+                <span
+                  className='material-symbols-outlined add'
+                  onClick={handleClickOpen}
+                >
+                  add
+                </span>
+                <Dialog
+                  open={open}
+                  onClose={handleClose}
+                >
+                  <TodoForm onClose={handleClose} />
+                </Dialog>
+              </div>
+            )}
             <IconButton
               size='large'
               aria-label='account of current user'

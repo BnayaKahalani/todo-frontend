@@ -19,12 +19,10 @@ export const Home = () => {
 
     const { source, destination } = result
 
-    // Update the order of the todos based on the drag and drop
     const newTodos = Array.from(todos)
     const [removed] = newTodos.splice(source.index, 1)
     newTodos.splice(destination.index, 0, removed)
 
-    // Update the order of the todos in the context
     dispatch({ type: "SET_TODOS", payload: newTodos })
   }
 
