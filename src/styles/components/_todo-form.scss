@@ -1,11 +1,18 @@
 .todo-form {
-  width: 30rem;
+  min-width: 300px;
   padding: 2rem;
+
+  @media (min-width: 900px) {
+    min-width: 450px;
+  }
+
+  @media (min-width: 1200px) {
+    min-width: 600px;
+  }
 
   label,
   input {
+    width: 100%;
     display: block;
   }
-
-
 }
