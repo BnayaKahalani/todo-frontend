@@ -12,6 +12,15 @@ const theme = createTheme({
   typography: {
     fontFamily: "Poppins, sans-serif",
   },
+  breakpoints: {
+    values: {
+      xs: 0,
+      sm: 900,
+      md: 1200,
+      lg: 1400,
+      xl: 1536,
+    },
+  },
 })
 
 function App() {
