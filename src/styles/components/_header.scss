@@ -25,8 +25,10 @@ header {
     color: white;
     bottom: 3rem;
     right: 3rem;
+    max-width: 500px;
     background-color: $primary;
     border-radius: 50%;
+
 
     &:hover {
       cursor: pointer;

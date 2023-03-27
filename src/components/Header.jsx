@@ -89,7 +89,7 @@ const Header = () => {
             <Box sx={{ display: "flex", alignItems: "center" }}>
               <SportsSoccerIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} />
               <Typography
-                variant='h6'
+                variant='h5'
                 noWrap
                 component='a'
                 href='/'

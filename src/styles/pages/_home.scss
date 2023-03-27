@@ -1,4 +1,6 @@
 .home {
+  max-width: 1000px;
+  margin: 0 auto;
 
   .todos {
     display: grid;
@@ -34,7 +36,6 @@
     margin: 0 auto;
     width: 40px;
     height: 140px;
-    // border: solid 1px black;
     position: relative;
 
     .shadow {
