@@ -41,6 +41,7 @@ export const Home = () => {
         },
       })
       const json = await response.json()
+      console.log("json HOME: ", json)
 
       if (response.ok) {
         dispatch({ type: "SET_TODOS", payload: json })
@@ -49,11 +50,31 @@ export const Home = () => {
     if (user) {
       fetchTodos()
     }
-  }, [dispatch, user])
+  }, [user])
 
   return (
     <div className='home'>
-      <DragDropContext onDragEnd={onDragEnd}>
+      {todos ? (
+        todos.length === 0 ? (
+          <h1 className='no-todos'>Your next goal?</h1>
+        ) : (
+          todos.map((todo) => (
+            <TodoDetails
+              key={todo._id}
+              todo={todo}
+            />
+          ))
+        )
+      ) : (
+        <div className='box'>
+          <div className='shadow'></div>
+          <div className='gravity'>
+            <div className='ball'></div>
+          </div>
+        </div>
+      )}
+
+      {/* <DragDropContext onDragEnd={onDragEnd}>
         <Droppable droppableId='todos'>
           {(provided) => (
             <div
@@ -107,7 +128,7 @@ export const Home = () => {
             </div>
           )}
         </Droppable>
-      </DragDropContext>
+      </DragDropContext> */}
     </div>
   )
 }

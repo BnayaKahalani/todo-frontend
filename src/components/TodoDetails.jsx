@@ -9,7 +9,6 @@ const TodoDetails = ({ todo }) => {
   const { dispatch } = useTodosContext()
   const { user } = useAuthContext()
 
-  const [isTitleCrossedOut, setIsTitleCrossedOut] = useState(false)
   const [open, setOpen] = useState(false)
 
   const API = "http://localhost:4000/api/"
@@ -36,20 +35,21 @@ const TodoDetails = ({ todo }) => {
     }
   }
 
-  const handleUpdateClick = async (updatedTodo) => {
-    if (!user) {
-      return
-    }
+  const handleUpdateClick = async (fieldsToUpdate) => {
+    console.log("todo BEFORE:", todo)
+    console.log("fieldsToUpdate", fieldsToUpdate)
+    if (!user) return
 
-    const response = await fetch(API + "todos/" + updatedTodo._id, {
+    const response = await fetch(API + "todos/" + todo._id, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${user.token}`,
       },
-      body: JSON.stringify(updatedTodo),
+      body: JSON.stringify(fieldsToUpdate),
     })
     const json = await response.json()
+    console.log("json", json)
 
     if (response.ok) {
       dispatch({ type: "UPDATE_TODO", payload: json })
@@ -66,9 +66,9 @@ const TodoDetails = ({ todo }) => {
   return (
     <div className='todo-details'>
       <div className='todo-details-text'>
-        <h2 className={isTitleCrossedOut ? "crossed-out" : ""}>{todo.title}</h2>
+        <h2 className={todo.crossedOut ? "crossed-out" : ""}>{todo.title}</h2>
         <p>
-          <strong className={isTitleCrossedOut ? "crossed-out" : ""}>{todo.body}</strong>
+          <strong className={todo.crossedOut ? "crossed-out" : ""}>{todo.body}</strong>
         </p>
         <p>{formatDistanceToNow(new Date(todo.updatedAt), { addSuffix: true })}</p>
       </div>
@@ -88,7 +88,7 @@ const TodoDetails = ({ todo }) => {
         <span
           style={{ backgroundColor: "#3CB371" }}
           className='material-symbols-outlined'
-          onClick={handleDoneClick}
+          onClick={() => handleUpdateClick({ crossedOut: !todo.crossedOut })}
         >
           task_alt
         </span>
