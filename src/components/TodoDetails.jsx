@@ -13,10 +13,6 @@ const TodoDetails = ({ todo }) => {
 
   const API = "http://localhost:4000/api/"
 
-  const handleDoneClick = () => {
-    setIsTitleCrossedOut(!isTitleCrossedOut)
-  }
-
   const handleDeleteClick = async () => {
     if (!user) {
       return
@@ -36,8 +32,6 @@ const TodoDetails = ({ todo }) => {
   }
 
   const handleUpdateClick = async (fieldsToUpdate) => {
-    console.log("todo BEFORE:", todo)
-    console.log("fieldsToUpdate", fieldsToUpdate)
     if (!user) return
 
     const response = await fetch(API + "todos/" + todo._id, {
@@ -83,7 +77,10 @@ const TodoDetails = ({ todo }) => {
           open={open}
           onClose={handleClose}
         >
-          <TodoForm onClose={handleClose} />
+          <TodoForm
+            todo={todo}
+            onClose={handleClose}
+          />
         </Dialog>
         <span
           style={{ backgroundColor: "#3CB371" }}

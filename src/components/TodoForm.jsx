@@ -1,23 +1,37 @@
-import { useState, useRef, useEffect } from "react"
+import { useState, useRef, useEffect, useContext } from "react"
 import { useTodosContext } from "../hooks/useTodosContext"
 import { useAuthContext } from "../hooks/useAuthContext"
+import { TodosContext } from "../context/TodoContext"
 
 const API = "http://localhost:4000/api/"
 
-const TodoForm = ({ onClose }) => {
+const TodoForm = ({ onClose, todo }) => {
   const { dispatch } = useTodosContext()
+  const { todos } = useContext(TodosContext)
   const { user } = useAuthContext()
-
-  const [title, setTitle] = useState("")
-  const [body, setBody] = useState("")
+  const [todoToSave, setTodoToSave] = useState(null)
   const [error, setError] = useState(null)
   const [emptyFields, setEmptyFields] = useState([])
 
   const inputRef = useRef(null)
 
   useEffect(() => {
-    inputRef.current.focus()
+    if (todo) {
+      setTodoToSave(todo)
+    } else {
+      const newTodo = { title: "", body: "" }
+      setTodoToSave(newTodo)
+    }
   }, [])
+
+  const handleChange = ({ target }) => {
+    const field = target.name
+    const value = target.value
+    setTodoToSave((prevTodo) => ({
+      ...prevTodo,
+      [field]: value,
+    }))
+  }
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -27,11 +41,12 @@ const TodoForm = ({ onClose }) => {
       return
     }
 
-    const todo = { title, body }
-
-    const response = await fetch(API + "todos", {
-      method: "POST",
-      body: JSON.stringify(todo),
+    const method = todoToSave._id ? "PUT" : "POST"
+    const type = todoToSave._id ? "UPDATE_TODO" : "CREATE_TODO"
+    const URL = todoToSave._id ? API + "todos/" + todo._id : API + "todos"
+    const response = await fetch(URL, {
+      method,
+      body: JSON.stringify(todoToSave),
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${user.token}`,
@@ -46,40 +61,45 @@ const TodoForm = ({ onClose }) => {
     }
 
     if (response.ok) {
-      setTitle("")
-      setBody("")
+      setTodoToSave({ title: "", body: "" })
       setError(null)
       setEmptyFields([])
-      dispatch({ type: "CREATE_TODO", payload: json })
+      dispatch({ type, payload: json })
       onClose()
     }
   }
+
+  if (!todoToSave) return <div>loading...</div>
 
   return (
     <form
       className='todo-form'
       onSubmit={handleSubmit}
     >
-      <h3>Add a new todo</h3>
+      <h3> {todoToSave._id ? <span>Edit</span> : <span>Add</span>} a new todo</h3>
 
-      <label htmlFor=''>Title</label>
+      <label htmlFor='title'>Title</label>
       <input
+        id='title'
         type='text'
-        onChange={(e) => setTitle(e.target.value)}
-        value={title}
+        onChange={handleChange}
+        name='title'
+        value={todoToSave.title}
         className={emptyFields.includes("title") ? "error" : ""}
         ref={inputRef}
       />
 
-      <label htmlFor=''>Body</label>
+      <label htmlFor='body'>Body</label>
       <input
+        id='body'
         type='text'
-        onChange={(e) => setBody(e.target.value)}
-        value={body}
+        onChange={handleChange}
+        name='body'
+        value={todoToSave.body}
         className={emptyFields.includes("body") ? "error" : ""}
       />
 
-      <button>Add todo</button>
+      <button>Save todo</button>
       {error && <div className='error'>{error}</div>}
     </form>
   )

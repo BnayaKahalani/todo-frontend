@@ -119,7 +119,10 @@ const Header = () => {
                     open={open}
                     onClose={handleClose}
                   >
-                    <TodoForm onClose={handleClose} />
+                    <TodoForm
+                      todo={null}
+                      onClose={handleClose}
+                    />
                   </Dialog>
                 </div>
               )}
