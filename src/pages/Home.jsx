@@ -13,18 +13,6 @@ export const Home = () => {
 
   const [open, setOpen] = useState(false)
 
-  // const onDragEnd = (result) => {
-  //   if (!result.destination) return
-
-  //   const { source, destination } = result
-
-  //   const newTodos = Array.from(todos)
-  //   const [removed] = newTodos.splice(source.index, 1)
-  //   newTodos.splice(destination.index, 0, removed)
-
-  //   dispatch({ type: "SET_TODOS", payload: newTodos })
-  // }
-
   const handleClickOpen = () => {
     setOpen(true)
   }
@@ -40,7 +28,6 @@ export const Home = () => {
         },
       })
       const json = await response.json()
-      console.log("json HOME: ", json)
 
       if (response.ok) {
         dispatch({ type: "SET_TODOS", payload: json })
@@ -53,32 +40,12 @@ export const Home = () => {
 
   return (
     <div className='home'>
-      {todos ? (
-        todos.length === 0 ? (
-          <h1 className='no-todos'>Your next goal?</h1>
-        ) : (
-          todos.map((todo) => (
-            <TodoDetails
-              key={todo._id}
-              todo={todo}
-            />
-          ))
-        )
-      ) : (
-        <div className='box'>
-          <div className='shadow'></div>
-          <div className='gravity'>
-            <div className='ball'></div>
-          </div>
-        </div>
-      )}
-
       <div className='todos'>
         {todos ? (
           todos.length === 0 ? (
             <h1 className='no-todos'>Your next goal?</h1>
           ) : (
-            todos.map((todo, index) => <TodoDetails todo={todo} />)
+            todos.map((todo) => <TodoDetails todo={todo} />)
           )
         ) : (
           <div className='box'>

@@ -43,7 +43,6 @@ const TodoDetails = ({ todo }) => {
       body: JSON.stringify(fieldsToUpdate),
     })
     const json = await response.json()
-    console.log("json", json)
 
     if (response.ok) {
       dispatch({ type: "UPDATE_TODO", payload: json })

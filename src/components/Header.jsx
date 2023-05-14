@@ -183,6 +183,12 @@ const Header = () => {
                   onClose={() => setAnchorElUser(null)}
                 >
                   <MenuItem
+                    key='todos'
+                    onClick={() => handleUserMenuClick("/")}
+                  >
+                    <Typography textAlign='center'>Todos</Typography>
+                  </MenuItem>
+                  <MenuItem
                     key='userSettings'
                     onClick={() => handleUserMenuClick("/user-settings")}
                   >
