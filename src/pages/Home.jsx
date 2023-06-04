@@ -45,7 +45,12 @@ export const Home = () => {
           todos.length === 0 ? (
             <h1 className='no-todos'>Your next goal?</h1>
           ) : (
-            todos.map((todo) => <TodoDetails todo={todo} />)
+            todos.map((todo) => (
+              <TodoDetails
+                todo={todo}
+                key={todo._id}
+              />
+            ))
           )
         ) : (
           <div className='box'>

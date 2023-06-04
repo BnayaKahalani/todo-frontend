@@ -13,7 +13,6 @@ import {
   Avatar,
   MenuItem,
   Dialog,
-  CssBaseline,
   useScrollTrigger,
   Slide,
 } from "@mui/material"
@@ -170,17 +169,16 @@ const Header = () => {
                   sx={{ mt: "45px" }}
                   id='menu-appbar'
                   anchorEl={anchorElUser}
-                  anchorOrigin={{
-                    vertical: "top",
-                    horizontal: "right",
-                  }}
-                  keepMounted
-                  transformOrigin={{
-                    vertical: "top",
-                    horizontal: "right",
-                  }}
                   open={Boolean(anchorElUser)}
                   onClose={() => setAnchorElUser(null)}
+                  PaperProps={{
+                    style: {
+                      transform: "translateX(75vw)",
+                      left: "50%",
+                      top: "100%",
+                      minWidth: "200px",
+                    },
+                  }}
                 >
                   <MenuItem
                     key='todos'
