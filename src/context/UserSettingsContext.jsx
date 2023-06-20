@@ -4,7 +4,7 @@ export const UserSettingsContext = createContext()
 
 export const userSettingsReducer = (state, action) => {
   switch (action.type) {
-    case "CHANGE_TEAM":
+    case "IS_DARK":
       return {
         team: action.payload,
       }
