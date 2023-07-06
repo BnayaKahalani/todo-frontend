@@ -3,7 +3,7 @@ import { useTodosContext } from "../hooks/useTodosContext"
 import { useAuthContext } from "../hooks/useAuthContext"
 import { TodosContext } from "../context/TodoContext"
 
-const API = "http://localhost:4000/api/"
+const API = process.env.NODE_ENV === "production" ? "/api/" : "http://localhost:4000/api/"
 
 const TodoForm = ({ onClose, todo }) => {
   const { dispatch } = useTodosContext()
