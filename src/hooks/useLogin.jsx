@@ -1,7 +1,7 @@
 import { useState } from "react"
 import { useAuthContext } from "./useAuthContext"
 
-const API = "http://localhost:4000/api/"
+const API = process.env.NODE_ENV === "production" ? "/api/" : "http://localhost:4000/api/"
 
 export const useLogin = () => {
   const [error, setError] = useState(null)

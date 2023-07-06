@@ -11,7 +11,7 @@ const TodoDetails = ({ todo }) => {
 
   const [open, setOpen] = useState(false)
 
-  const API = "http://localhost:4000/api/"
+  const API = process.env.NODE_ENV === "production" ? "/api/" : "http://localhost:4000/api/"
 
   const handleDeleteClick = async () => {
     if (!user) {

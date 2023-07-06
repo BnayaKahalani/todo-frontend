@@ -5,7 +5,7 @@ import TodoForm from "../components/TodoForm"
 import { useAuthContext } from "../hooks/useAuthContext"
 import Dialog from "@mui/material/Dialog"
 
-const API = "http://localhost:4000/api/"
+const API = process.env.NODE_ENV === "production" ? "/api/" : "http://localhost:4000/api/"
 
 export const Home = () => {
   const { todos, dispatch } = useTodosContext()
