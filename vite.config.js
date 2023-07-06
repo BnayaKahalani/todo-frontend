@@ -8,6 +8,7 @@ export default defineConfig({
     port: 5714,
   },
   build: {
-    outDir: '../todo-backend/public'
+    outDir: '../todo-backend/public',
+    emptyOutDir: true
   }
 })
