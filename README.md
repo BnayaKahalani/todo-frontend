@@ -4,7 +4,7 @@
 
 In this project, I explored various full-stack processes and technologies in order to create a responsive MERN todo list app.
 
-[Click here to see the result.]()
+[Click here to see the result.](https://goalguru.onrender.com/)
 
 Tools I used: React, React Context, SASS, MUI, Node.js, Express, MongoDB, Mongoose, bcrypt, jsonwebtoken and Vite.
 
