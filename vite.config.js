@@ -6,5 +6,8 @@ export default defineConfig({
   plugins: [react()],
   server: {
     port: 5714,
+  },
+  build: {
+    outDir: '../todo-backend/public'
   }
 })
